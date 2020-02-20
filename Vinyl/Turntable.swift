@@ -22,11 +22,14 @@ public final class Turntable: URLSession {
     var errorHandler: ErrorHandler = DefaultErrorHandler()
     fileprivate let turntableConfiguration: TurntableConfiguration
     fileprivate var player: Player?
-    fileprivate var recorder: Recorder?
-    fileprivate var recordingSession: URLSession?
+    public var recorder: Recorder?
+    public var recordingSession: URLSession?
     fileprivate let operationQueue: OperationQueue
     
-    public init(configuration: TurntableConfiguration, delegateQueue: OperationQueue? = nil, urlSession: URLSession? = nil) {
+    public init(
+        configuration: TurntableConfiguration,
+        delegateQueue: OperationQueue? = nil,
+        urlSession: URLSession? = nil) {
         
         turntableConfiguration = configuration
         if let delegateQueue = delegateQueue {
@@ -253,13 +256,13 @@ extension Turntable {
 
 extension Turntable {
     
-    fileprivate static func createPlayer(with vinyl: Vinyl, configuration: TurntableConfiguration) -> Player {
+    public static func createPlayer(with vinyl: Vinyl, configuration: TurntableConfiguration) -> Player {
         
         let trackMatchers = configuration.trackMatchers(for: vinyl)
         return Player(vinyl: vinyl, trackMatchers: trackMatchers)
     }
     
-    fileprivate static func createPlastic(cassette cassetteName: String, bundle: Bundle) -> Plastic {
+    public static func createPlastic(cassette cassetteName: String, bundle: Bundle) -> Plastic {
         
         guard let cassette: [String: AnyObject] = loadJSON(from: bundle, fileName: cassetteName) else {
             fatalError("💣 Cassette file \"\(cassetteName)\" not found 😩")
@@ -272,7 +275,7 @@ extension Turntable {
         return plastic
     }
     
-    fileprivate static func createPlastic(vinyl vinylName: String, bundle: Bundle, recordingMode: RecordingMode) -> Plastic? {
+    public static func createPlastic(vinyl vinylName: String, bundle: Bundle, recordingMode: RecordingMode) -> Plastic? {
         if let plastic: Plastic = loadJSON(from: bundle, fileName: vinylName) {
             return plastic
         }

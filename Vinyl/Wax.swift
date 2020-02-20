@@ -6,15 +6,15 @@
 //  Copyright © 2016 Velhotes. All rights reserved.
 //
 
-struct Wax {
+public struct Wax {
     
-    var tracks: [Track] = []
+    public var tracks: [Track] = []
     
-    init(vinyl: Vinyl) {
+    public init(vinyl: Vinyl) {
         tracks.append(contentsOf: vinyl.tracks)
     }
     
-    init(tracks: [Track]) {
+    public init(tracks: [Track]) {
         self.tracks.append(contentsOf: tracks)
     }
     

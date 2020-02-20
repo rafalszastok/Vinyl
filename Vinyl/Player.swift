@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Player {
+public struct Player {
     
     let vinyl: Vinyl
     let trackMatchers: [TrackMatcher]
